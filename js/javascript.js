@@ -1,4 +1,3 @@
-
 /* ##################### */
 /* # RANDOM CHOICE FUNCTION # */
 /* ##################### */
@@ -20,6 +19,7 @@ function getComputerChoice() {
 /* ##################### */
 /* #ONE ROUND OF ROCK-PAPER-SCISSOR # */
 /* ##################### */
+
 let playerWinRound = "Player wins this round!";
 let computerWinRound = "Computer wins this round!";
 let draw = "Draw!";
@@ -66,15 +66,14 @@ function playRound(playerSelection, computerSelection) {
 }     
    
 
-
-
-
 /* ##################### */
 /* # 5 Games of Rock-Paper-Scissor # */
 /* ##################### */
+
 let gameWinner
 let playerScore = 0;
 let computerScore = 0;
+let roundPlayed = 1;
 //Create new function game()
 function game() {
 //call playRound() function 5 times :
@@ -88,9 +87,12 @@ function game() {
         //keep score of each wins/loses
         console.log("Your score is " + playerScore);
         console.log("The computer's score is " + computerScore);
+        console.log("Round:" + roundPlayed);
+        roundPlayed++;
     }
     // after 5 games decide the winner :
     if ( playerScore > computerScore ) {
+
         gameWinner = "You win!";
         } else if ( computerScore > playerScore ) {
         gameWinner = "Computer wins!";
