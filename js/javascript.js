@@ -1,14 +1,14 @@
 
 /* ##################### */
-/* # RANDOM CHOISE FUNCTION # */
+/* # RANDOM CHOICE FUNCTION # */
 /* ##################### */
 
 function getComputerChoice() {
-    let compChoice = Math.floor(Math.random()*3) + 1;
+    let compChoice = Math.floor(Math.random()*3);
     let choice;
-    if (compChoice == 1) {
+    if (compChoice == 0) {
         choice = "Rock";
-    } else if (compChoice === 2) {
+    } else if (compChoice === 1) {
         choice = "Paper";
     } else {
         choice = "Scissor";
@@ -23,10 +23,6 @@ function getComputerChoice() {
 let playerWinRound = "Player wins this round!";
 let computerWinRound = "Computer wins this round!";
 let draw = "Draw!";
-const playerSelection = "scissor";
-const computerSelection = getComputerChoice();
-// playRound(playerSelection,computerSelection);
-
 //This function will play one round of  ROCK-PAPER-SCISSOR with computer
 function playRound(playerSelection, computerSelection) {
     // let result;
@@ -39,29 +35,35 @@ function playRound(playerSelection, computerSelection) {
     if (playerChoice == "ROCK" && compChoice1 =="ROCK") {
         return draw
     } else if (playerChoice == "ROCK" && compChoice1 =="PAPER") {
+        computerScore++
         return computerWinRound
     }else if (playerChoice == "ROCK" && compChoice1 =="SCISSOR") {
+        playerScore++;
         return playerWinRound
     //if player selects paper
     }else if (playerChoice == "PAPER" && compChoice1 =="PAPER") {
         return draw
     }else if (playerChoice == "PAPER" && compChoice1 =="ROCK") {
+        playerScore++;
         return playerWinRound
     }else if (playerChoice == "PAPER" && compChoice1 =="SCISSOR") {
+        computerScore++
         return computerWinRound
     //if selects scissor    
     }else if (playerChoice == "SCISSOR" && compChoice1 =="SCISSOR") {
         return draw
     }else if (playerChoice == "SCISSOR" && compChoice1 =="ROCK") {
+        computerScore++
         return computerWinRound
     }else if (playerChoice == "SCISSOR" && compChoice1 =="PAPER") {
+        playerScore++;
         return playerWinRound
     }else {
         return 'I dunno what happened, check your brain and code, man'
     }
     
     
-  }     
+}     
    
 
 
@@ -70,46 +72,30 @@ function playRound(playerSelection, computerSelection) {
 /* ##################### */
 /* # 5 Games of Rock-Paper-Scissor # */
 /* ##################### */
-let playerWin = "Player wins the game! Congratulations!"
-let computerWin = "Computer wins the game! Congratulations!"
+let gameWinner
 let playerScore = 0;
 let computerScore = 0;
-let draws = 0;
-
 //Create new function game()
 function game() {
-    let result1;
-
-//call playRound() function 5 times
-for (let i = 0; i < 5; i++) {
-    let playerSelectedFive = prompt('Choose one : Paper or Scissor or Rock?', 'Paper');
-   result1 = playRound(playerSelectedFive, computerSelection);
-    //keep score of each wins/loses
-    console.log(result1);
-    gameScore(result1);
-    console.log("Your score is " + playerScore);
-    console.log("The computer's score is " + computerScore);
-
-    if(i==4) {
-        if (playerScore > computerScore) {
-           return console.log(playerWin);
-    } else if (computerScore > playerScore) {
-      return   console.log(computerWin);
-    }else {
-        return console.log(draw)
+//call playRound() function 5 times :
+    for (let i = 0; i < 5; i++) {
+        //asking for player choice
+        let playerSelectedFive = prompt('Choose one : Paper or Scissor or Rock?', 'Paper');
+        // calling 5 times function that randomize choice to get diffrent result every step
+        let compChoiceCallEveryTime = getComputerChoice();
+        // calling function with those choices into console
+        console.log(playRound(playerSelectedFive, compChoiceCallEveryTime))
+        //keep score of each wins/loses
+        console.log("Your score is " + playerScore);
+        console.log("The computer's score is " + computerScore);
     }
+    // after 5 games decide the winner :
+    if ( playerScore > computerScore ) {
+        gameWinner = "You win!";
+        } else if ( computerScore > playerScore ) {
+        gameWinner = "Computer wins!";
+        } else {
+        gameWinner = "Its a Tie!"
+        }
+    return console.log("The winner of Bo5 is : " + gameWinner)
 }
-}
-}
-
-function gameScore(result) {
-
-    if (result === playerWinRound) {
-        playerScore++;
-      } else if (result === draw) {
-        draws++;
-      } else {
-        computerScore++;
-      }
-}
-    //report who is winner
